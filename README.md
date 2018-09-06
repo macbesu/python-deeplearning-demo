@@ -1,3 +1,3 @@
 # Haskelll
 
-My learning notes of Haskell
+Haskell is cool :)
