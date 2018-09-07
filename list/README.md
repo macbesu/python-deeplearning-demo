@@ -110,5 +110,13 @@
 *Main> lengthOfLostNumbers
 # 5
 
+*Main> removeNonUppercaseResult1
+# "HA"
+*Main> removeNonUppercaseResult2
+# "ILIKEFROGS"
+
+*Main> nestedListResult1
+# [[2,2,4],[2,4,6,8],[2,4,2,6,2,6]]
+
 *Main> :q
 ```

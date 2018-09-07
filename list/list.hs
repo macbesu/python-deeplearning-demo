@@ -85,3 +85,10 @@ listComprehension = [adjectives ++ " " ++ nouns | adjectives <- adjectives, noun
 -- Ok. Let's write our own version of length! We'll call it length'.
 length' xs = sum [ 1 | _ <- xs]
 lengthOfLostNumbers = length' lostNumbers
+
+removeNonUppercase st = [ c | c <- st, c `elem` ['A'..'Z']]
+removeNonUppercaseResult1 = removeNonUppercase "Hahaha! Ahahaha!"
+removeNonUppercaseResult2 = removeNonUppercase "IdontLIKEFROGS"
+
+nestedList2 = [[1,3,5,2,3,1,2,4,5],[1,2,3,4,5,6,7,8,9],[1,2,4,2,1,6,3,1,3,2,3,6]]
+nestedListResult1 = [ [ x | x <- xs, even x ] | xs <- nestedList2 ]
