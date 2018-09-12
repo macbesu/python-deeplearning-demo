@@ -1,6 +1,6 @@
 ```bash
 ghci
-Prelude> :l baby.hs
+Prelude> :l Main.hs
 *Main> doubleMe 3
 # 6
 *Main> doubleMe 8.3

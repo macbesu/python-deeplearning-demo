@@ -1,5 +1,5 @@
 ```bash
-*Main> :l let.hs
+*Main> :l Main.hs
 
 *Main> lostNumbers
 # [1,2,3,5,10]

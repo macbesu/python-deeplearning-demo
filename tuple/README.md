@@ -1,5 +1,5 @@
 ```bash
-*Main> :l let.hs
+*Main> :l Main.hs
 
 *Main> tupleResult1
 # 8
