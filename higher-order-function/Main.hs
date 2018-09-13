@@ -68,3 +68,51 @@ chain 1 = [1]
 chain n
   | even n = n:chain (n `div` 2)
   | odd n = n:chain (n*3 + 1)
+
+numLongChains :: Int
+numLongChains = length (filter isLong (map chain [1..100]))
+  where isLong xs = length xs > 15
+
+numLongChains' :: Int
+numLongChains' = length (filter (\xs -> length xs > 15) (map chain [1..100]))
+
+result14 = zipWith (\a b -> (a * 30 + 3) / b) [5,4,3,2,1] [1,2,3,4,5]
+result15 = map (\(a,b) -> a + b) [(1,2),(3,5),(6,3)]
+
+-- There are times when using this notion is cool. 
+-- I think that the flip function is the most readable when defined like so:
+flip''' :: (a -> b -> c) -> b -> a -> c
+flip''' f = \x y -> f y x
+
+
+-- Let's take a look at the foldl function, also called the left fold.
+-- It folds the list up from the left side.
+-- We'll use a fold instead of exlicit recursion.
+sum' :: (Num a) => [a] -> a
+sum' xs = foldl (\acc x -> acc + x) 0 xs
+-- http://s3.amazonaws.com/lyah/foldl.png
+
+-- If we take into account that functions are curried,
+-- we can write this implementation ever more succinctly, like so:
+sum'' :: (Num a) => [a] -> a
+sum'' = foldl (+) 0
+-- ↑ The lambda function (\acc x -> acc + x) is the same as (+).
+-- We can omit the xs as the parameter because calling foldl (+) 0 will return a function that takes a list.
+-- Generally, if you have a function like "foo a = bar b a", you can rewrite it as "foo = bar b", because of currying.
+
+-- We start off with False. It makes sense to use False as a starting value. We assume it isn't there.
+-- Also, if we call a fold on an empty list, the result will just be the starting value.
+-- Then we check the current element is the element we're looking for.
+elem' :: (Eq a) => a -> [a] -> Bool
+elem' y ys = foldl (\acc x -> if x == y then True else acc) False ys
+
+-- The right fold, foldr works in a similar way to the left fold, only the accumulator eats up the values from the right.
+-- Also, the left fold's binary functions has the accumulator as the first parameter and the current value as the second one
+-- (so \acc x -> ...), 
+-- the right fold's binary function has the current value as the first parameter and the accumulator as the second one
+-- (so \x acc -> ...).
+map' :: (a -> b) -> [a] -> [b]
+map'  f xs = foldr (\x acc -> f x : acc) [] xs
+map'' f xs = foldl (\acc x -> acc ++ [f x]) [] xs
+
+-- My question on stackoverflow: https://stackoverflow.com/questions/52314908/why-the-function-is-much-more-expensive-than
