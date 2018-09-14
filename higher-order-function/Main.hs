@@ -115,4 +115,15 @@ map' :: (a -> b) -> [a] -> [b]
 map'  f xs = foldr (\x acc -> f x : acc) [] xs
 map'' f xs = foldl (\acc x -> acc ++ [f x]) [] xs
 
--- My question on stackoverflow: https://stackoverflow.com/questions/52314908/why-the-function-is-much-more-expensive-than
+-- But the thing is that the ++ function is much more expensive than :, so we usually use right folds when we're building up new lists from a list.
+-- My question on stackoverflow: Why the “++” function is much more expensive than “:”?
+-- https://stackoverflow.com/questions/52314908/why-the-function-is-much-more-expensive-than
+-- One big difference is that right folds work on infinite lists, whereas left ones don't!
+
+----------------------------------------------------------------------------------------------
+-- Folds can be used to implement any function where you traverse a list once,
+-- element by element, and then return something based on that.
+-- Whenever you want to traverse a list to return something, chances are you want want a fold.
+-- That's why folds are, along with maps and filters, one of the most useful types of function
+-- in functional programming.
+----------------------------------------------------------------------------------------------
