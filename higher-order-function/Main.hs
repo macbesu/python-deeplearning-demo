@@ -127,3 +127,39 @@ map'' f xs = foldl (\acc x -> acc ++ [f x]) [] xs
 -- That's why folds are, along with maps and filters, one of the most useful types of function
 -- in functional programming.
 ----------------------------------------------------------------------------------------------
+
+-- The foldl1 and foldr1 functions work much like fold1 and foldr,
+-- only you don't need to provide them with an explicit starting value.
+maximum' :: (Ord a) => [a] -> a
+maximum' = foldr1 (\x acc -> if x > acc then x else acc)
+
+reverse' :: [a] -> [a]
+reverse' = foldl (\acc x -> x : acc) []
+
+result16 = scanl1 (\acc x -> if x > acc then x else acc) [3,4,5,3,7,9,2,1]
+
+sqrtSums :: Int
+sqrtSums = length (takeWhile (<9999) (scanl1 (+) (map sqrt [1..]))) + 1
+
+result17 = sum (map sqrt [1..131])
+result18 = sum (map sqrt [1..130])
+
+-- Function application with a space is left-associative (so f a b c) is the same as ((f a) b) c)),
+-- function application with $ is right-associative.
+-- That's all very well, but how does this help us? Most of the time,
+-- it's a convenience function so that we don't have to write so many parentheses.
+
+result19 = map (\x -> negate (abs x)) [5,-3,-6,7,-3,2,-19,24]
+result20 = map (negate . abs) [5,-3,-6,7,-3,2,-19,24]
+
+result21 = map (\xs -> negate (sum (tail xs))) [[1..5],[3..6],[1..7]]
+result22 = map (negate . sum . tail) [[1..5],[3..6],[1..7]]
+result23 = (sum . replicate 5 . max 6.7) 8.9
+result24 = replicate 100 . product . map (*3) . zipWith max [1,2,3,4,5] $ [4,5,6,7,8]
+
+-- fn x = ceiling (negate (tan (cos (max 50 x))))  >>  fn = ceiling . negate . tan . cos . max 50   
+result25 = ceiling . negate . tan . cos . max 50
+
+-- oddSquareSum = sum (takeWhile (<10000) (filter odd (map (^2) [1..])))  >>  
+-- oddSquareSum = sum . takeWhile (<10000) . filter odd . map (^2) $ [1..]  
+result26 = sum . takeWhile (<9999) . filter odd . map (^2) $ [1..]
