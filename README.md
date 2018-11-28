@@ -1,3 +1,0 @@
-# Haskelll
-
-Haskell is cool :)
